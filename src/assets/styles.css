@@ -1,24 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-    background-color: #a7bed3;
-    font-family: 'Quicksand', sans-serif;
-    text-align: center;
-    color: #ffffff;
-}
-
-h1 {
-    font-size: 72px;
-    margin: 40px 0 0;
+    font-family: 'Quicksand';
+    background: #343434;
 }
 
 .background {
-    background-color: black;
+    background-color: #786fa650;
+    color: black;
+    font-size: 100px;
     width: 90%;
-    height: 600px;
+    height: 700px;
     margin: auto;
+    border-radius: 10px;
 }
 
-.form {
+.userList {
+    font-size: 32px;
+    color: white;
+}
+
+.pagination {
     margin: 20px;
 }

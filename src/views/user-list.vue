@@ -1,27 +1,37 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="container mx-auto">
+    <div class="text-center m-2.5 p-4">
+      <h1 class="text-7xl text-white">RANDOM USER LIST</h1>
+    </div>
+    <div class="mt-3">
+      <div class="grid grid-col-3 gap-2">
+        <generate-user-component @generate-user="submitted" />
+        <div class="grid grid-cols-4 gap-2 col-span-3 p-2 my-2">
+          <user-list-component :list="list" />
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form">
-    <form>
-      <input type="text" id="fname" name="fname" />
-      <select id="gender" name="gender">
-        <option value="">All</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-      <input type="submit" value="Generate" />
-    </form>
-  </div>
-  <div class="background">What</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import useUserList from "@/composable/use-user-list";
+import GenerateUserComponent from "@/components/generate-user-component.vue";
+import UserListComponent from "@/components/user-list-component.vue";
 
 export default defineComponent({
+  components: {
+    GenerateUserComponent,
+    UserListComponent,
+  },
   props: {
     msg: String,
+  },
+  setup() {
+    const { list, submitted } = useUserList();
+
+    return { list, submitted };
   },
 });
 </script>
