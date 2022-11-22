@@ -7,22 +7,3 @@ body {
     font-family: 'Quicksand';
     background: #343434;
 }
-
-.background {
-    background-color: #786fa650;
-    color: black;
-    font-size: 100px;
-    width: 90%;
-    height: 700px;
-    margin: auto;
-    border-radius: 10px;
-}
-
-.userList {
-    font-size: 32px;
-    color: white;
-}
-
-.pagination {
-    margin: 20px;
-}
