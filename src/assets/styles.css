@@ -6,4 +6,8 @@
 body {
     font-family: 'Quicksand';
     background: #343434;
+    background-color: #a7bed3;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    color: #ffffff;
 }
