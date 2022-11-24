@@ -13,10 +13,13 @@
   <div
     v-else
     class="text-m p-1 overflow-y-auto"
-    v-for="(user, index) in list"
+    v-for="(user, index) in list.slice(startList, startList + perPage)"
     :key="index"
   >
-    <single-card-component :index="index" :user="user" />
+    <single-card-component
+      :index="(currentPage - 1) * perPage + index"
+      :user="user"
+    />
   </div>
 </template>
 
@@ -40,14 +43,17 @@ export default defineComponent({
     },
   },
   setup(props) {
-    let currentPage = ref(0);
+    let currentPage = ref(1);
     const perPage = ref(8);
+    let startList = ref(0);
 
     const pageChange = (pageNumber: number) => {
       currentPage.value = pageNumber;
+      startList.value = (currentPage.value - 1) * perPage.value;
+      // eslint-disable-next-line prettier/prettier
     };
 
-    return { currentPage, perPage, props, pageChange };
+    return { currentPage, perPage, props, pageChange, startList };
   },
   mounted() {
     this.currentPage = 1;
