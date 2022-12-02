@@ -10,7 +10,7 @@
       >
         <div class="flex justify-center">
           <img
-            :src="profile.picture.large"
+            :src="picture[index]"
             alt=""
             class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
           />
@@ -18,10 +18,10 @@
 
         <div class="mt-16">
           <h1 class="font-bold text-center text-3xl text-gray-900">
-            {{ profile.name.first }} {{ profile.name.last }}
+            {{ fullName[index] }}
           </h1>
           <p class="text-center text-sm text-gray-400 font-medium">
-            {{ profile.id.name }}{{ profile.id.value }}
+            {{ profileId[index] }}
           </p>
           <p>
             <span> </span>
@@ -31,7 +31,7 @@
               href="#"
               class="text-gray-200 block rounded-lg text-center font-medium leading-6 px-6 py-3 bg-gray-900 hover:bg-black hover:text-white"
               >Connect with
-              <span class="font-bold">@{{ profile.name.first }}</span></a
+              <span class="font-bold">@{{ firstName[index] }}</span></a
             >
           </div>
           <div class="flex justify-between items-center my-5 px-6">
@@ -74,10 +74,7 @@
                 />
                 ADDRESS:
                 <span class="text-gray-500 text-xs">
-                  {{ profile.location.street.name }}
-                  {{ profile.location.street.number }},
-                  {{ profile.location.city }}, {{ profile.location.state }},
-                  {{ profile.location.country }}
+                  {{ location[index] }}
                 </span>
               </a>
 
@@ -115,7 +112,7 @@
                 />
                 GENDER:
                 <span
-                  v-if="profile.gender === 'male'"
+                  v-if="gender[index] === 'male'"
                   class="text-gray-500 text-xs"
                   >He/Him
                 </span>
@@ -143,6 +140,58 @@ export default defineComponent({
   mounted() {
     this.id = this.$route.params.id;
     this.profile(this.id);
+  },
+  computed: {
+    picture: function (): string[] {
+      return this.person.map(function (person) {
+        return person.picture.large;
+      });
+    },
+    fullName: function (): string[] {
+      return this.person.map(function (person) {
+        return person.name.first + " " + person.name.last;
+      });
+    },
+    profileId: function (): string[] {
+      return this.person.map(function (person) {
+        return person.id.name + person.id.value;
+      });
+    },
+    firstName: function (): string[] {
+      return this.person.map(function (person) {
+        return person.name.first;
+      });
+    },
+    location: function (): string[] {
+      return this.person.map(function (person) {
+        return (
+          person.location.street.name +
+          " " +
+          person.location.street.number +
+          ", " +
+          person.location.city +
+          ", " +
+          person.location.state +
+          ", " +
+          person.location.country
+        );
+      });
+    },
+    email: function (): string[] {
+      return this.person.map(function (person) {
+        return person.email;
+      });
+    },
+    phoneNumber: function (): string[] {
+      return this.person.map(function (person) {
+        return person.phone;
+      });
+    },
+    gender: function (): string[] {
+      return this.person.map(function (person) {
+        return person.gender;
+      });
+    },
   },
 });
 </script>

@@ -50,7 +50,6 @@ export default defineComponent({
     const pageChange = (pageNumber: number) => {
       currentPage.value = pageNumber;
       startList.value = (currentPage.value - 1) * perPage.value;
-      // eslint-disable-next-line prettier/prettier
     };
 
     return { currentPage, perPage, props, pageChange, startList };
