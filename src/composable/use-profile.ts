@@ -7,32 +7,34 @@ function useProfile() {
   const person = ref<IUser[]>([]);
 
   function profile(id: string) {
+    const data = list.value[id];
+
     person.value.unshift({
       name: {
-        first: list.value[id].name.first,
-        last: list.value[id].name.last,
-        title: list.value[id].name.title,
+        first: data.name.first,
+        last: data.name.last,
+        title: data.name.title,
       },
-      gender: list.value[id].gender,
-      phone: list.value[id].phone,
-      email: list.value[id].email,
+      gender: data.gender,
+      phone: data.phone,
+      email: data.email,
       picture: {
-        large: list.value[id].picture.large,
+        large: data.picture.large,
       },
       location: {
         street: {
-          number: list.value[id].location.street.number,
-          name: list.value[id].location.street.name,
+          number: data.location.street.number,
+          name: data.location.street.name,
         },
-        city: list.value[id].location.city,
-        state: list.value[id].location.state,
-        country: list.value[id].location.country,
+        city: data.location.city,
+        state: data.location.state,
+        country: data.location.country,
       },
       id: {
-        name: list.value[id].id.name,
-        value: list.value[id].id.value,
+        name: data.id.name,
+        value: data.id.value,
       },
-      nationality: list.value[id].nationality,
+      nationality: data.nationality,
     });
   }
 
