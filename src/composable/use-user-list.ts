@@ -1,5 +1,5 @@
 import { ref, toRefs, reactive } from "vue";
-import IUser from "@/types/user";
+import { IUser } from "@/types/user";
 import useFetch from "./use-fetch";
 
 const users = reactive({
@@ -8,7 +8,14 @@ const users = reactive({
 
 function useUserList() {
   const submitted = async (numUser: number, gender: string) => {
-    const { person } = await useFetch(numUser, gender);
+    const params = new URLSearchParams({
+      results: numUser.toString(),
+      gender: gender,
+    });
+
+    const url = `https://randomuser.me/api/?${params.toString()}`;
+
+    const { person } = await useFetch(url);
     users.list = person;
   };
   return {

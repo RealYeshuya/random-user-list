@@ -1,14 +1,12 @@
-import IUser from "@/types/user";
+import { IUser } from "@/types/user";
 import { reactive } from "vue";
 
 let person = reactive<IUser[]>([]);
 
-async function useFetch(num: number, gender: string) {
+async function useFetch(url: string) {
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        `https://randomuser.me/api/?results=${num}&gender=${gender}`
-      );
+      const response = await fetch(url);
       const json = await response.json();
       person = json.results;
     } catch (errors) {
