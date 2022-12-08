@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import IUser from "@/types/user";
+import { IUser } from "@/types/user";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({

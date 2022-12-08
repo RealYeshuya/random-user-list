@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import IUser from "@/types/user";
+import { IUser } from "@/types/user";
 import EmptyListComponent from "@/components/empty-list-component.vue";
 import SingleCardComponent from "./single-card-component.vue";
 import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";

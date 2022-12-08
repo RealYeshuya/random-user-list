@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import IUser from "@/types/user";
+import { IUser } from "@/types/user";
 import useUserList from "./use-user-list";
 
 function useProfile() {
