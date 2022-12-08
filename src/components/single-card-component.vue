@@ -23,8 +23,7 @@
 
 <script lang="ts">
 import IUser from "@/types/user";
-import { defineComponent, PropType, ref } from "vue";
-import { RouterLink } from "vue-router";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   props: {

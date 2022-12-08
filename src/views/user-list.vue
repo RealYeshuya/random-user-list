@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import useUserList from "@/composable/use-user-list";
 import GenerateUserComponent from "@/components/generate-user-component.vue";
 import UserListComponent from "@/components/user-list-component.vue";

@@ -21,7 +21,7 @@
             {{ fullName[index] }}
           </h1>
           <p class="text-center text-sm text-gray-400 font-medium">
-            {{ profileId[index] }}
+            ID: {{ profileId[index] }}
           </p>
           <p>
             <span> </span>
@@ -66,7 +66,7 @@
             >
               <a
                 href="#"
-                class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150"
+                class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 block hover:bg-gray-100 transition duration-150"
               >
                 <img
                   src="https://avatars0.githubusercontent.com/u/35900628?v=4"
@@ -80,31 +80,33 @@
 
               <a
                 href="#"
-                class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150"
+                class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 block hover:bg-gray-100 transition duration-150"
               >
                 <img
                   src="https://avatars0.githubusercontent.com/u/35900628?v=4"
                   class="rounded-full h-6 shadow-md inline-block mr-2"
                 />
                 EMAIL:
-                <span class="text-gray-500 text-xs">{{ profile.email }}</span>
+                <span class="text-gray-500 text-xs">{{ email[index] }}</span>
               </a>
 
               <a
                 href="#"
-                class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150"
+                class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 block hover:bg-gray-100 transition duration-150"
               >
                 <img
                   src="https://avatars0.githubusercontent.com/u/35900628?v=4"
                   class="rounded-full h-6 shadow-md inline-block mr-2"
                 />
                 PHONE NO.:
-                <span class="text-gray-500 text-xs">{{ profile.phone }}</span>
+                <span class="text-gray-500 text-xs">{{
+                  phoneNumber[index]
+                }}</span>
               </a>
 
               <a
                 href="#"
-                class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150"
+                class="w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 block hover:bg-gray-100 transition duration-150"
               >
                 <img
                   src="https://avatars0.githubusercontent.com/u/35900628?v=4"

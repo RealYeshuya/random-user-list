@@ -1,5 +1,5 @@
 import IUser from "@/types/user";
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 
 let person = reactive<IUser[]>([]);
 
