@@ -1,31 +1,39 @@
-interface IUser {
-  name: {
-    first: string;
-    last: string;
-    title?: string;
-  };
+export interface IUser {
+  name: UserName;
   gender: string;
   phone: string;
   email: string;
-  picture: {
-    large: string;
-    medium?: string;
-    thumbnail?: string;
-  };
-  location: {
-    street: {
-      number: string;
-      name: string;
-    };
-    city: string;
-    state: string;
-    country: string;
-  };
-  id: {
-    name: string;
-    value: string;
-  };
+  picture: UserPicture;
+  location: Location;
+  id: UserId;
   nationality?: string;
 }
 
-export default IUser;
+export interface Location {
+  street: LocationStreet;
+  city: string;
+  state: string;
+  country: string;
+}
+
+export interface LocationStreet {
+  number: string;
+  name: string;
+}
+
+export interface UserId {
+  name: string;
+  value: string;
+}
+
+export interface UserPicture {
+  large: string;
+  medium?: string;
+  thumbnail?: string;
+}
+
+export interface UserName {
+  first: string;
+  last: string;
+  title?: string;
+}
