@@ -1,16 +1,12 @@
 <template>
-  <div
-    v-for="(profile, index) in person"
-    :key="index"
-    class="container mx-auto my-40"
-  >
+  <div class="container mx-auto my-40">
     <div>
       <div
         class="bg-white relative shadow rounded-lg w-4/6 md:w-4/6 lg:w-3/6 xl:w-3/6 mx-auto"
       >
         <div class="flex justify-center">
           <img
-            :src="picture[index]"
+            :src="person?.picture.large"
             alt=""
             class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-md border-4 border-white transition duration-200 transform hover:scale-110"
           />
@@ -18,10 +14,19 @@
 
         <div class="mt-16">
           <h1 class="font-bold text-center text-3xl text-gray-900">
-            {{ fullName[index] }}
+            {{
+              fullName(
+                person?.name.first as string,
+                person?.name.last as string
+              ).value
+            }}
           </h1>
           <p class="text-center text-sm text-gray-400 font-medium">
-            ID: {{ profileId[index] }}
+            ID:
+            {{
+              userId(person?.id.name as string, person?.id.value as string)
+                .value
+            }}
           </p>
           <p>
             <span> </span>
@@ -31,7 +36,7 @@
               href="#"
               class="text-gray-200 block rounded-lg text-center font-medium leading-6 px-6 py-3 bg-gray-900 hover:bg-black hover:text-white"
               >Connect with
-              <span class="font-bold">@{{ firstName[index] }}</span></a
+              <span class="font-bold">@{{ person?.name.first }}</span></a
             >
           </div>
           <div class="flex justify-between items-center my-5 px-6">
@@ -74,7 +79,15 @@
                 />
                 ADDRESS:
                 <span class="text-gray-500 text-xs">
-                  {{ location[index] }}
+                  {{
+                    location(
+                      person?.location.street.name as string,
+                      person?.location.street.number as string,
+                      person?.location.city as string,
+                      person?.location.state as string,
+                      person?.location.country as string
+                    ).value
+                  }}
                 </span>
               </a>
 
@@ -87,7 +100,7 @@
                   class="rounded-full h-6 shadow-md inline-block mr-2"
                 />
                 EMAIL:
-                <span class="text-gray-500 text-xs">{{ email[index] }}</span>
+                <span class="text-gray-500 text-xs">{{ person?.email }}</span>
               </a>
 
               <a
@@ -99,9 +112,7 @@
                   class="rounded-full h-6 shadow-md inline-block mr-2"
                 />
                 PHONE NO.:
-                <span class="text-gray-500 text-xs">{{
-                  phoneNumber[index]
-                }}</span>
+                <span class="text-gray-500 text-xs">{{ person?.phone }}</span>
               </a>
 
               <a
@@ -114,7 +125,7 @@
                 />
                 GENDER:
                 <span
-                  v-if="gender[index] === 'male'"
+                  v-if="person?.gender === 'male'"
                   class="text-gray-500 text-xs"
                   >He/Him
                 </span>
@@ -130,70 +141,52 @@
 
 <script lang="ts">
 import useProfile from "@/composable/use-profile";
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const id = ref();
+    let id = ref("");
+    const route = useRoute();
     const { person, profile } = useProfile();
 
-    return { id, profile, person };
-  },
-  mounted() {
-    this.id = this.$route.params.id;
-    this.profile(this.id);
-  },
-  computed: {
-    picture: function (): string[] {
-      return this.person.map(function (person) {
-        return person.picture.large;
+    const fullName = (firstName: string, lastName: string) =>
+      computed(() => {
+        return firstName + " " + lastName;
       });
-    },
-    fullName: function (): string[] {
-      return this.person.map(function (person) {
-        return person.name.first + " " + person.name.last;
+
+    const userId = (name: string, value: string) =>
+      computed(() => {
+        return name + value;
       });
-    },
-    profileId: function (): string[] {
-      return this.person.map(function (person) {
-        return person.id.name + person.id.value;
-      });
-    },
-    firstName: function (): string[] {
-      return this.person.map(function (person) {
-        return person.name.first;
-      });
-    },
-    location: function (): string[] {
-      return this.person.map(function (person) {
+
+    const location = (
+      streetName: string,
+      streetNumber: string,
+      city: string,
+      state: string,
+      country: string
+    ) =>
+      computed(() => {
         return (
-          person.location.street.name +
+          streetName +
           " " +
-          person.location.street.number +
-          ", " +
-          person.location.city +
-          ", " +
-          person.location.state +
-          ", " +
-          person.location.country
+          streetNumber +
+          " " +
+          city +
+          " " +
+          state +
+          " " +
+          country
         );
       });
-    },
-    email: function (): string[] {
-      return this.person.map(function (person) {
-        return person.email;
-      });
-    },
-    phoneNumber: function (): string[] {
-      return this.person.map(function (person) {
-        return person.phone;
-      });
-    },
-    gender: function (): string[] {
-      return this.person.map(function (person) {
-        return person.gender;
-      });
-    },
+
+    onMounted(() => {
+      id.value = route.params.id as string;
+      profile(id.value);
+    });
+
+    return { id, profile, person, fullName, userId, location };
   },
 });
 </script>

@@ -28,7 +28,7 @@ import { IUser } from "@/types/user";
 import EmptyListComponent from "@/components/empty-list-component.vue";
 import SingleCardComponent from "./single-card-component.vue";
 import VueTailwindPagination from "@ocrv/vue-tailwind-pagination";
-import { defineComponent, PropType, ref } from "vue";
+import { defineComponent, onMounted, PropType, ref } from "vue";
 
 export default defineComponent({
   components: {
@@ -52,10 +52,11 @@ export default defineComponent({
       startList.value = (currentPage.value - 1) * perPage.value;
     };
 
+    onMounted(() => {
+      currentPage.value = 1;
+    });
+
     return { currentPage, perPage, props, pageChange, startList };
-  },
-  mounted() {
-    this.currentPage = 1;
   },
 });
 </script>
