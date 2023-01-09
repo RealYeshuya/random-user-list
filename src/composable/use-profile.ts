@@ -4,12 +4,12 @@ import useUserList from "./use-user-list";
 
 function useProfile() {
   const { list } = useUserList();
-  const person = ref<IUser[]>([]);
+  const person = ref<IUser>();
 
   function profile(id: string) {
     const data = list.value[id];
 
-    person.value.unshift({
+    person.value = {
       name: {
         first: data.name.first,
         last: data.name.last,
@@ -35,10 +35,10 @@ function useProfile() {
         value: data.id.value,
       },
       nationality: data.nationality,
-    });
+    };
   }
 
-  return { list, person, profile };
+  return { person, profile };
 }
 
 export default useProfile;

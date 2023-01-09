@@ -3,14 +3,14 @@
     class="bg-white pt-10 rounded flex flex-col space-y-4 justify-between h-auto border-2 border-black shadow-lg"
   >
     <div class="flex justify-center">
-      <img class="rounded-full h-36 w-36" :src="picture" />
+      <img class="rounded-full h-36 w-36" :src="user.picture.large" />
     </div>
     <div>
       <h1 class="text-2xl mt-4 flex justify-center">
         {{ fullName }}
       </h1>
       <h2 class="text-m mb-3 flex justify-center">
-        {{ email }}
+        {{ user.email }}
       </h2>
     </div>
     <router-link :to="`/userProfile/` + index">
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { IUser } from "@/types/user";
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 
 export default defineComponent({
   props: {
@@ -36,16 +36,15 @@ export default defineComponent({
       required: true,
     },
   },
-  computed: {
-    fullName() {
-      return `${this.user.name.first} ${this.user.name.last}`;
-    },
-    email() {
-      return `${this.user.email}`;
-    },
-    picture() {
-      return `${this.user.picture.large}`;
-    },
+  setup(props) {
+    const firstName = ref<string>(props.user.name.first);
+    const lastName = ref<string>(props.user.name.last);
+
+    const fullName = computed<string>(() => {
+      return `${firstName.value} ${lastName.value}`;
+    });
+
+    return { fullName };
   },
 });
 </script>

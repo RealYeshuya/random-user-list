@@ -1,10 +1,9 @@
-import { ref, toRefs, reactive } from "vue";
+import { ref } from "vue";
 import { IUser } from "@/types/user";
 import useFetch from "./use-fetch";
+import apiNames from "@/constants/api-name";
 
-const users = reactive({
-  list: ref<IUser[]>([]),
-});
+const list = ref<IUser[]>([]);
 
 function useUserList() {
   const submitted = async (numUser: number, gender: string) => {
@@ -13,13 +12,12 @@ function useUserList() {
       gender: gender,
     });
 
-    const url = `https://randomuser.me/api/?${params.toString()}`;
+    const url = `${apiNames.URL}/api/?${params.toString()}`;
 
-    const { person } = await useFetch(url);
-    users.list = person;
+    list.value = await useFetch<IUser[]>(url);
   };
   return {
-    ...toRefs(users),
+    list,
     submitted,
   };
 }
