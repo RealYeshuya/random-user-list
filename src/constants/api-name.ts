@@ -1,3 +1,3 @@
 export default {
-  URL: "https://randomuser.me/api/?",
+  URL: "https://randomuser.me",
 };

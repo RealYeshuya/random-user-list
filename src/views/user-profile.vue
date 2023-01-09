@@ -14,19 +14,11 @@
 
         <div class="mt-16">
           <h1 class="font-bold text-center text-3xl text-gray-900">
-            {{
-              fullName(
-                person?.name.first as string,
-                person?.name.last as string
-              ).value
-            }}
+            {{ fullName }}
           </h1>
           <p class="text-center text-sm text-gray-400 font-medium">
             ID:
-            {{
-              userId(person?.id.name as string, person?.id.value as string)
-                .value
-            }}
+            {{ userId }}
           </p>
           <p>
             <span> </span>
@@ -79,15 +71,7 @@
                 />
                 ADDRESS:
                 <span class="text-gray-500 text-xs">
-                  {{
-                    location(
-                      person?.location.street.name as string,
-                      person?.location.street.number as string,
-                      person?.location.city as string,
-                      person?.location.state as string,
-                      person?.location.country as string
-                    ).value
-                  }}
+                  {{ location }}
                 </span>
               </a>
 
@@ -150,36 +134,27 @@ export default defineComponent({
     const route = useRoute();
     const { person, profile } = useProfile();
 
-    const fullName = (firstName: string, lastName: string) =>
-      computed(() => {
-        return firstName + " " + lastName;
-      });
+    const fullName = computed(() => {
+      return person.value?.name.first + " " + person.value?.name.last;
+    });
 
-    const userId = (name: string, value: string) =>
-      computed(() => {
-        return name + value;
-      });
+    const userId = computed(() => {
+      return person.value?.id.name + " " + person.value?.id.value;
+    });
 
-    const location = (
-      streetName: string,
-      streetNumber: string,
-      city: string,
-      state: string,
-      country: string
-    ) =>
-      computed(() => {
-        return (
-          streetName +
-          " " +
-          streetNumber +
-          " " +
-          city +
-          " " +
-          state +
-          " " +
-          country
-        );
-      });
+    const location = computed(() => {
+      return (
+        person.value?.location.street.name +
+        " " +
+        person.value?.location.street.number +
+        " " +
+        person.value?.location.city +
+        " " +
+        person.value?.location.state +
+        " " +
+        person.value?.location.city
+      );
+    });
 
     onMounted(() => {
       id.value = route.params.id as string;

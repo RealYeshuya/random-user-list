@@ -12,10 +12,9 @@ function useUserList() {
       gender: gender,
     });
 
-    const url = `${apiNames.URL}${params.toString()}`;
+    const url = `${apiNames.URL}/api/?${params.toString()}`;
 
-    const output = await useFetch<IUser[]>(url);
-    list.value = output;
+    list.value = await useFetch<IUser[]>(url);
   };
   return {
     list,
